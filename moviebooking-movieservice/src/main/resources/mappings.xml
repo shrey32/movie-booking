@@ -16,6 +16,8 @@
 			<column name="durationInMinutes" />
 			<column name="image" />
 			<column name="releaseDate"></column>
+			<column name="created" />
+			<column name="updated" />
 		</attributes>
 	</entity>
 	<entity class="com.shrey.moviebooking.commons.model.Language">
@@ -27,6 +29,8 @@
 			</id>
 			<column name="name" />
 			<column name="description" />
+			<column name="created" />
+			<column name="updated" />
 		</attributes>
 	</entity>
 	<entity class="com.shrey.moviebooking.commons.model.Cast">
@@ -39,6 +43,8 @@
 			<column name="name" />
 			<column name="image" />
 			<column name="movieCastRole" />
+			<column name="created" />
+			<column name="updated" />
 		</attributes>
 	</entity>
 	<entity class="com.shrey.moviebooking.commons.model.Category">
@@ -50,18 +56,22 @@
 			</id>
 			<column name="name" />
 			<column name="description" />
+			<column name="created" />
+			<column name="updated" />
 		</attributes>
 	</entity>
 	<entity
 		class="com.shrey.moviebooking.commons.model.MovieLanguage">
 		<table name="movielanguage" />
-	<schema name="moviesdb" />
+		<schema name="moviesdb" />
 		<attributes>
 			<id name="id">
 				<generated-value strategy="IDENTITY" />
 			</id>
 			<column name="movieId" />
 			<column name="languageId" />
+			<column name="created" />
+			<column name="updated" />
 		</attributes>
 	</entity>
 	<entity class="com.shrey.moviebooking.commons.model.MovieCast">
@@ -73,6 +83,8 @@
 			</id>
 			<column name="movieId" />
 			<column name="castId" />
+			<column name="created" />
+			<column name="updated" />
 		</attributes>
 	</entity>
 	<entity
@@ -85,6 +97,8 @@
 			</id>
 			<column name="movieId" />
 			<column name="categoryId" />
+			<column name="created" />
+			<column name="updated" />
 		</attributes>
 	</entity>
 </entity-mappings>
