@@ -7,7 +7,7 @@ import com.shrey.moviebooking.commons.enums.TheatreStatus;
  * @author Shrey
  *
  */
-public class Theatre {
+public class Theatre extends DBEntity{
 
 	private long id;
 	private String name;

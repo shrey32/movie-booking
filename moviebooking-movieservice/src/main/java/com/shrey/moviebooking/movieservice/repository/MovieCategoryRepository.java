@@ -12,6 +12,6 @@ import com.shrey.moviebooking.commons.model.MovieCategory;
  */
 @Repository
 public interface MovieCategoryRepository
-		extends CommonMappingRepository<MovieCategory>, JpaRepository<MovieCategory, Long> {
+		extends FindByMovieRepository<MovieCategory>, JpaRepository<MovieCategory, Long> {
 
 }

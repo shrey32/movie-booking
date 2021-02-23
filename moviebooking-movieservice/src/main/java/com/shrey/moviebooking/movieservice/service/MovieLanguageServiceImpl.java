@@ -1,5 +1,6 @@
 package com.shrey.moviebooking.movieservice.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -35,6 +36,7 @@ public class MovieLanguageServiceImpl implements CommongMappingService<MovieLang
 	@Transactional(propagation = Propagation.SUPPORTS)
 	public MovieLanguage add(MovieLanguage movieLanguage) {
 		logger.info("Saving movie to language mapping " + movieLanguage);
+		movieLanguage.setCreated(new Date());
 		return this.movieLanguageRepository.save(movieLanguage);
 	}
 

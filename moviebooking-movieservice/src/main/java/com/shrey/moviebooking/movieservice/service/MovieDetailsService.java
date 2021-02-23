@@ -14,4 +14,5 @@ public interface MovieDetailsService<T> {
 	
 	Optional<T> findById(long id);
 	
+	Optional<T> findByName(String name);
 }

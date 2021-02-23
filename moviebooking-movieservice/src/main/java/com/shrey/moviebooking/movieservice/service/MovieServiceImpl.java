@@ -1,5 +1,6 @@
 package com.shrey.moviebooking.movieservice.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +32,14 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	public Movie add(Movie movie) {
 		logger.info("Adding new Movie " + movie);
+		movie.setCreated(new Date());
+		Optional<Movie> optionalMovie = this.findByName(movie.getName());
+		if (optionalMovie.isPresent()) {
+			logger.info("Movie Already Exists, updating");
+			movie.setId(optionalMovie.get().getId());
+			movie.setUpdated(new Date());
+			movie.setCreated(optionalMovie.get().getCreated());
+		}
 		return this.movieRepository.save(movie);
 	}
 
@@ -51,6 +60,11 @@ public class MovieServiceImpl implements MovieService {
 	public List<Movie> findAll() {
 		logger.info("finding all movies");
 		return this.movieRepository.findAll();
+	}
+
+	@Override
+	public Optional<Movie> findByName(String name) {
+		return this.movieRepository.findByName(name);
 	}
 
 }

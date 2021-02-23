@@ -7,7 +7,7 @@ import java.util.List;
  * @author Shrey
  *
  */
-public interface CommonMappingRepository<T> {
+public interface FindByMovieRepository<T> {
 
 	List<T> findAllByMovieId(Long movieId);
 	

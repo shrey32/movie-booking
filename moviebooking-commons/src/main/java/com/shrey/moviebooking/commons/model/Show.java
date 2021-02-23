@@ -9,7 +9,7 @@ import com.shrey.moviebooking.commons.enums.ShowStatus;
  * @author Shrey
  *
  */
-public class Show {
+public class Show extends DBEntity{
 
 	private long id;
 	private long theatreId;

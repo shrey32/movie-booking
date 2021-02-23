@@ -7,7 +7,7 @@ import com.shrey.moviebooking.commons.enums.ContactType;
  * @author Shrey
  *
  */
-public class Contact {
+public class Contact extends DBEntity{
 
 	private long id;
 	private ContactType contactType = ContactType.MOBILE;

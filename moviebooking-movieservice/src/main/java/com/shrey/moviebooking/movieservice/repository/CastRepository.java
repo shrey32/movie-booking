@@ -11,6 +11,6 @@ import com.shrey.moviebooking.commons.model.Cast;
  *
  */
 @Repository
-public interface CastRepository extends JpaRepository<Cast, Long>{
+public interface CastRepository extends JpaRepository<Cast, Long>, FindByNameRepository<Cast> {
 
 }

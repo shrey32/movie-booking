@@ -5,7 +5,7 @@ package com.shrey.moviebooking.commons.model;
  * @author Shrey
  *
  */
-public class Address {
+public class Address extends DBEntity{
 
 	private long id;
 	private String line1, line2, city, state, country, pincode;

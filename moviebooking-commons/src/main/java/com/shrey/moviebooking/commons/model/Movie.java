@@ -7,7 +7,7 @@ import java.util.Date;
  * @author Shrey
  *
  */
-public class Movie {
+public class Movie extends DBEntity{
 
 	private long id;
 	private String name;

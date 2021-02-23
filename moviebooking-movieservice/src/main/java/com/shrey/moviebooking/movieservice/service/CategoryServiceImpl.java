@@ -1,5 +1,6 @@
 package com.shrey.moviebooking.movieservice.service;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -34,15 +35,28 @@ public class CategoryServiceImpl implements MovieDetailsService<Category> {
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS)
 	public Category add(Category category) {
-		logger.info("Adding a new cast ==>" + category);
+		logger.info("Adding a new Category ==>" + category);
+		category.setCreated(new Date());
+		Optional<Category> optionalCategory = this.findByName(category.getName());
+		if (optionalCategory.isPresent()) {
+			logger.info("category Already Exists, updating");
+			category.setId(optionalCategory.get().getId());
+			category.setUpdated(new Date());
+			category.setCreated(optionalCategory.get().getCreated());
+		}
 		return this.categoryRepository.save(category);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Optional<Category> findById(long id) {
-		logger.info("finding cast by id ==>" + id);
+		logger.info("finding Category by id ==>" + id);
 		return this.categoryRepository.findById(id);
 	}
 
+	@Override
+	public Optional<Category> findByName(String name) {
+		return this.categoryRepository.findByName(name);
+	}
+	
 }

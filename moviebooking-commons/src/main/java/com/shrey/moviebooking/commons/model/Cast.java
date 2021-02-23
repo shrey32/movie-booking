@@ -7,7 +7,7 @@ import com.shrey.moviebooking.commons.enums.MovieCastRole;
  * @author Shrey
  *
  */
-public class Cast {
+public class Cast extends DBEntity{
 
 	private long id;
 	private String name;

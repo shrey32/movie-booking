@@ -5,7 +5,7 @@ package com.shrey.moviebooking.commons.model;
  * @author Shrey
  *
  */
-public class MovieCast {
+public class MovieCast extends DBEntity{
 
 	private long id;
 	private long movieId;

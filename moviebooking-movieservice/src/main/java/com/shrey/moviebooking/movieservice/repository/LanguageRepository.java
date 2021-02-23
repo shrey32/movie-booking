@@ -11,6 +11,6 @@ import com.shrey.moviebooking.commons.model.Language;
  *
  */
 @Repository
-public interface LanguageRepository extends JpaRepository<Language, Long> {
+public interface LanguageRepository extends JpaRepository<Language, Long>,FindByNameRepository<Language> {
 
 }

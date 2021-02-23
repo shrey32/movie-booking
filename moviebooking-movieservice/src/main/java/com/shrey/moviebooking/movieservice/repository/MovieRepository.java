@@ -11,6 +11,6 @@ import com.shrey.moviebooking.commons.model.Movie;
  *
  */
 @Repository
-public interface MovieRepository extends JpaRepository<Movie, Long> {
+public interface MovieRepository extends JpaRepository<Movie, Long>, FindByNameRepository<Movie> {
 
 }

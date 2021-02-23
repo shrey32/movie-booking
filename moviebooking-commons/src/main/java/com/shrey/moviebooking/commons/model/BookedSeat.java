@@ -5,12 +5,11 @@ package com.shrey.moviebooking.commons.model;
  * @author Shrey
  *
  */
-public class BookedSeat {
+public class BookedSeat extends DBEntity {
 
 	private long id;
 	private long bookingId;
 	private long seatId;
-	private long showId;
 
 	public long getId() {
 		return id;
@@ -34,14 +33,6 @@ public class BookedSeat {
 
 	public void setSeatId(long seatId) {
 		this.seatId = seatId;
-	}
-
-	public long getShowId() {
-		return showId;
-	}
-
-	public void setShowId(long showId) {
-		this.showId = showId;
 	}
 
 }

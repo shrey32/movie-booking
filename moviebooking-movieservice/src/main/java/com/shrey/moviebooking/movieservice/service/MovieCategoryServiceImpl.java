@@ -1,5 +1,6 @@
 package com.shrey.moviebooking.movieservice.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -35,6 +36,7 @@ public class MovieCategoryServiceImpl implements CommongMappingService<MovieCate
 	@Transactional(propagation = Propagation.SUPPORTS)
 	public MovieCategory add(MovieCategory movieCategory) {
 		logger.info("Saving movie to language mapping " + movieCategory);
+		movieCategory.setCreated(new Date());
 		return this.movieCategoryRepository.save(movieCategory);
 	}
 

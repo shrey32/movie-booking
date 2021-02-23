@@ -1,5 +1,6 @@
 package com.shrey.moviebooking.movieservice.service;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -35,6 +36,14 @@ public class CastServiceImpl implements MovieDetailsService<Cast> {
 	@Transactional(propagation = Propagation.SUPPORTS)
 	public Cast add(Cast cast) {
 		logger.info("Adding a new cast ==>" + cast);
+		Optional<Cast> optionalCast = this.findByName(cast.getName());
+		cast.setCreated(new Date());
+		if (optionalCast.isPresent()) {
+			logger.info("Cast Already Exists, updating");
+			cast.setId(optionalCast.get().getId());
+			cast.setUpdated(new Date());
+			cast.setCreated(optionalCast.get().getCreated());
+		}
 		return this.castRepository.save(cast);
 	}
 
@@ -43,6 +52,12 @@ public class CastServiceImpl implements MovieDetailsService<Cast> {
 	public Optional<Cast> findById(long id) {
 		logger.info("finding cast by id ==>" + id);
 		return this.castRepository.findById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Cast> findByName(String name) {
+		return this.castRepository.findByName(name);
 	}
 
 }

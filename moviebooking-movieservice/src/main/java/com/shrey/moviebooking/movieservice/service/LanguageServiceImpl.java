@@ -1,5 +1,6 @@
 package com.shrey.moviebooking.movieservice.service;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -34,15 +35,28 @@ public class LanguageServiceImpl implements MovieDetailsService<Language> {
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS)
 	public Language add(Language language) {
-		logger.info("Adding a new cast ==>" + language);
+		logger.info("Adding a new Language ==>" + language);
+		language.setCreated(new Date());
+		Optional<Language> optionalLanguage = this.findByName(language.getName());
+		if (optionalLanguage.isPresent()) {
+			logger.info("Language Already Exists, updating");
+			language.setId(optionalLanguage.get().getId());
+			language.setUpdated(new Date());
+			language.setCreated(optionalLanguage.get().getCreated());
+		}
 		return this.languageRepository.save(language);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Optional<Language> findById(long id) {
-		logger.info("finding cast by id ==>" + id);
+		logger.info("finding Language by id ==>" + id);
 		return this.languageRepository.findById(id);
 	}
+	
+	@Override
+		public Optional<Language> findByName(String name) {
+			return this.languageRepository.findByName(name);
+		}
 
 }

@@ -1,5 +1,6 @@
 package com.shrey.moviebooking.movieservice.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -35,6 +36,7 @@ public class MovieCastServiceImpl implements CommongMappingService<MovieCast> {
 	@Transactional(propagation = Propagation.SUPPORTS)
 	public MovieCast add(MovieCast movieCast) {
 		logger.info("Saving movie to cast mapping " + movieCast);
+		movieCast.setCreated(new Date());
 		return this.movieCastRepository.save(movieCast);
 	}
 

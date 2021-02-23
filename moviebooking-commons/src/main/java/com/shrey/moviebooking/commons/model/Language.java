@@ -5,7 +5,7 @@ package com.shrey.moviebooking.commons.model;
  * @author Shrey
  *
  */
-public class Language {
+public class Language extends DBEntity{
 
 	private long id;
 	private String name;
