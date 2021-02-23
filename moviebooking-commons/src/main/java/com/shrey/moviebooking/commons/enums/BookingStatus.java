@@ -7,6 +7,6 @@ package com.shrey.moviebooking.commons.enums;
  */
 public enum BookingStatus {
 
-	UNBOOKED, ACTIVE, CANCELLED;
+	UNBOOKED, ACTIVE, CANCELLED, INACTIVE;
 
 }
