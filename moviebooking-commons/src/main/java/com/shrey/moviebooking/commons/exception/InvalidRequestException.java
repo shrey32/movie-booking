@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class InvalidMovieRequestException extends RuntimeException {
+public class InvalidRequestException extends RuntimeException {
 
 	/**
 	 * 
@@ -17,7 +17,7 @@ public class InvalidMovieRequestException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	private String message;
 
-	public InvalidMovieRequestException(String message) {
+	public InvalidRequestException(String message) {
 		this.message = message;
 	}
 
