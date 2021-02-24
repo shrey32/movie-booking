@@ -42,6 +42,7 @@ public class BookingsController {
 	@Autowired
 	private BookingService bookingServie;
 
+	@Autowired
 	private Validator<BookingDTO> bookingDTOValidator;
 
 	@PostMapping
