@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.shrey.moviebooking.commons.model.Contact;
 import com.shrey.moviebooking.theatreservice.repository.ContactRepository;
@@ -15,6 +16,7 @@ import com.shrey.moviebooking.theatreservice.repository.ContactRepository;
  * @author Shrey
  *
  */
+@Service
 public class ContactServiceImpl implements ContactService {
 
 	private static final Logger log = LoggerFactory.getLogger(ContactServiceImpl.class);

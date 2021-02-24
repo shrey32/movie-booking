@@ -15,6 +15,6 @@ import com.shrey.moviebooking.commons.model.Theatre;
 @Repository
 public interface TheatreRepository extends JpaRepository<Theatre, Long> {
 
-	List<Theatre> findAllByAdressId(Iterable<Long> ids);
+	List<Theatre> findAllByAddressIdIn(List<Long> ids);
 
 }

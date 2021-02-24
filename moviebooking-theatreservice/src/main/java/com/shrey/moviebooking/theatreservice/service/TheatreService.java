@@ -18,6 +18,6 @@ public interface TheatreService {
 
 	boolean deleteById(Long theatreId);
 	
-	List<Theatre> findAllByAdressId(Iterable<Long> ids);
+	List<Theatre> findAllByAddressIdIn(List<Long> ids);
 	
 }

@@ -35,9 +35,7 @@ public class TheatreByAddressServiceImpl implements TheatreByAddressService {
 		List<Long> idList = ids(addressByCity);
 		idList.addAll(ids(addressByPincode));
 
-		Iterable<Long> idIterable = idList;
-
-		return this.theatreService.findAllByAdressId(idIterable);
+		return this.theatreService.findAllByAddressIdIn(idList);
 	}
 
 	private List<Long> ids(List<Address> addresses) {
