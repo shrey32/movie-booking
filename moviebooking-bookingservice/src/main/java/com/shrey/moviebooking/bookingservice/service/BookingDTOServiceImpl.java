@@ -35,9 +35,10 @@ public class BookingDTOServiceImpl implements BookingDTOService {
 		Booking booking = this.bookingService.create(bookingDTO.getBooking());
 
 		// saving seats
-		for (BookedSeat bookedSeat : bookingDTO.getBookedSeats()) {
+		for (BookedSeat bookedSeat : bookingDTO.getBookedSeats()) {			
+			bookedSeat.setBookingId(booking.getId());
 			BookedSeat newBookedSeat = this.bookedSeatService.create(bookedSeat);
-			bookedSeat.setId(newBookedSeat.getBookingId());
+			bookedSeat.setId(newBookedSeat.getId());
 		}
 
 		bookingDTO.setBooking(booking);
