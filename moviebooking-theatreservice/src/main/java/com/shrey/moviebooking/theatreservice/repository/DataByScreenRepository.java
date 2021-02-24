@@ -8,8 +8,8 @@ import java.util.List;
  *
  * @param <T>
  */
-public interface DataByTheatreRepository<T> {
+public interface DataByScreenRepository<T> {
 
-	List<T> findAllByTheatreId(Long theatreId);
+	List<T> findAllByScreenId(Long screenId);
 
 }

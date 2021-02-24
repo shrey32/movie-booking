@@ -32,7 +32,7 @@ public class TheatreServiceConfig {
 
 	@Bean("transactionManager")
 	public PlatformTransactionManager transactionManager(
-			@Qualifier("movieServiceEntityManagerFactory") EntityManagerFactory factory) {
+			@Qualifier("theatreServiceEntityManagerFactory") EntityManagerFactory factory) {
 		return new JpaTransactionManager(factory);
 	}
 

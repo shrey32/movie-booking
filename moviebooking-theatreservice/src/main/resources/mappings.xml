@@ -4,87 +4,108 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
 	version="2.0">
-	<entity class="com.shrey.moviebooking.commons.model.Movie">
-		<table name="movies" />
-		<schema name="moviesdb" />
+	<entity class="com.shrey.moviebooking.commons.model.Theatre">
+		<table name="theatres" />
+		<schema name="theatresdb" />
 		<attributes>
 			<id name="id">
 				<generated-value strategy="IDENTITY" />
 			</id>
 			<column name="name" />
-			<column name="description" />
-			<column name="durationInMinutes" />
-			<column name="image" />
-			<column name="releaseDate"></column>
+			<column name="addressId" />
+			<column name="status" />
+			<column name="created"></column>
+			<column name="updated"></column>
 		</attributes>
 	</entity>
-	<entity class="com.shrey.moviebooking.commons.model.Language">
-		<table name="languages" />
-		<schema name="moviesdb" />
+	<entity class="com.shrey.moviebooking.commons.model.Address">
+		<table name="addresses" />
+		<schema name="theatresdb" />
 		<attributes>
 			<id name="id">
 				<generated-value strategy="IDENTITY" />
 			</id>
-			<column name="name" />
-			<column name="description" />
+			<column name="line1" />
+			<column name="line2" />
+			<column name="city" />
+			<column name="state" />
+			<column name="country" />
+			<column name="pincode" />
+			<column name="created"></column>
+			<column name="updated"></column>
 		</attributes>
 	</entity>
-	<entity class="com.shrey.moviebooking.commons.model.Cast">
-		<table name="casts" />
-		<schema name="moviesdb" />
+	<entity class="com.shrey.moviebooking.commons.model.Contact">
+		<table name="contacts" />
+		<schema name="theatresdb" />
 		<attributes>
 			<id name="id">
 				<generated-value strategy="IDENTITY" />
 			</id>
-			<column name="name" />
-			<column name="image" />
-			<column name="movieCastRole" />
+			<column name="contactType" />
+			<column name="contact" />
+			<column name="created"></column>
+			<column name="updated"></column>
 		</attributes>
 	</entity>
-	<entity class="com.shrey.moviebooking.commons.model.Category">
-		<table name="categories" />
-		<schema name="moviesdb" />
+	<entity class="com.shrey.moviebooking.commons.model.TheatreContact">
+		<table name="theatrecontact" />
+		<schema name="theatresdb" />
+		<attributes>
+			<id name="id">
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<column name="theatreId" />
+			<column name="contactId" />
+			<column name="created"></column>
+			<column name="updated"></column>
+		</attributes>
+	</entity>
+	<entity class="com.shrey.moviebooking.commons.model.Screen">
+		<table name="screens" />
+		<schema name="theatresdb" />
 		<attributes>
 			<id name="id">
 				<generated-value strategy="IDENTITY" />
 			</id>
 			<column name="name" />
-			<column name="description" />
+			<column name="theatreId" />
+			<column name="capacity" />
+			<column name="created"></column>
+			<column name="updated"></column>
 		</attributes>
 	</entity>
 	<entity
-		class="com.shrey.moviebooking.commons.model.MovieLanguage">
-		<table name="movielanguage" />
-	<schema name="moviesdb" />
+		class="com.shrey.moviebooking.commons.model.Seat">
+		<table name="seats" />
+	<schema name="theatresdb" />
 		<attributes>
 			<id name="id">
 				<generated-value strategy="IDENTITY" />
 			</id>
-			<column name="movieId" />
-			<column name="languageId" />
+			<column name="screenId" />
+			<column name="theatreId" />
+			<column name="rowName" />
+			<column name="seatNumber" />
+			<column name="created"></column>
+			<column name="updated"></column>
 		</attributes>
 	</entity>
-	<entity class="com.shrey.moviebooking.commons.model.MovieCast">
-		<table name="moviecast" />
-		<schema name="moviesdb" />
+	<entity class="com.shrey.moviebooking.commons.model.Show">
+		<table name="shows" />
+		<schema name="theatresdb" />
 		<attributes>
 			<id name="id">
 				<generated-value strategy="IDENTITY" />
 			</id>
+			<column name="theatreId" />
+			<column name="screenId" />
 			<column name="movieId" />
-			<column name="castId" />
-		</attributes>
-	</entity>
-	<entity
-		class="com.shrey.moviebooking.commons.model.MovieCategory">
-		<table name="moviecategory" />
-		<schema name="moviesdb" />
-		<attributes>
-			<id name="id">
-				<generated-value strategy="IDENTITY" />
-			</id>
-			<column name="movieId" />
-			<column name="categoryId" />
+			<column name="startTime" />
+			<column name="price"></column>
+			<column name="status"></column>
+			<column name="created"></column>
+			<column name="updated"></column>
 		</attributes>
 	</entity>
 </entity-mappings>

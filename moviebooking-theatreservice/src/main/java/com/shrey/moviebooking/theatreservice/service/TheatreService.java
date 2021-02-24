@@ -17,6 +17,7 @@ public interface TheatreService {
 	Optional<Theatre> findById(Long theatreId);
 
 	boolean deleteById(Long theatreId);
-
-	List<Theatre> findAllByAddressId(Long addressId);
+	
+	List<Theatre> findAllByAdressId(Iterable<Long> ids);
+	
 }

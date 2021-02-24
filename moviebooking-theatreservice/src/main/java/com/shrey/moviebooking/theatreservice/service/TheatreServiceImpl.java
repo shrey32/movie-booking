@@ -1,22 +1,66 @@
 package com.shrey.moviebooking.theatreservice.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.shrey.moviebooking.commons.model.Theatre;
+import com.shrey.moviebooking.theatreservice.repository.TheatreRepository;
 
 /**
  * 
  * @author Shrey
  *
  */
-public interface TheatreServiceImpl {
+@Service
+public class TheatreServiceImpl implements TheatreService {
 
-	Theatre add(Theatre theatre);
-	
-	Optional<Theatre> findById(Long theatreId);
+	private static final Logger log = LoggerFactory.getLogger(TheatreService.class);
 
-	boolean deleteById(Long theatreId);
+	private TheatreRepository theatreRepository;
 
-	List<Theatre> findAllByAddressId(Long addressId);
+	@Autowired
+	public TheatreServiceImpl(TheatreRepository theatreRepository) {
+		this.theatreRepository = theatreRepository;
+	}
+
+	@Override
+	public Theatre add(Theatre theatre) {
+		log.info("Adding a new " + Theatre.class + " {" + theatre + "}");
+		theatre.setCreated(new Date());
+		Optional<Theatre> optionalTheatre = this.findById(theatre.getId());
+		if (optionalTheatre.isPresent()) {
+			log.info("Updating existing " + Theatre.class + " {" + theatre + "}");
+			Theatre found = optionalTheatre.get();
+			theatre.setId(found.getId());
+			theatre.setCreated(found.getCreated());
+			theatre.setUpdated(new Date());
+		}
+		return this.theatreRepository.save(theatre);
+	}
+
+	@Override
+	public Optional<Theatre> findById(Long theatreId) {
+		log.info("finding a " + Theatre.class + " by Id {" + theatreId + "}");
+		return this.theatreRepository.findById(theatreId);
+	}
+
+	@Override
+	public boolean deleteById(Long theatreId) {
+		log.info("deleting a " + Theatre.class + " by Id {" + theatreId + "}");
+		this.theatreRepository.deleteById(theatreId);
+		return this.findById(theatreId).isEmpty();
+	}
+
+	@Override
+	public List<Theatre> findAllByAdressId(Iterable<Long> ids) {
+		log.info("finding a " + Theatre.class + " by AddressIds");
+		return this.findAllByAdressId(ids);
+	}
+
 }
