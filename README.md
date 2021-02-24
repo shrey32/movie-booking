@@ -11,4 +11,4 @@ Project uses microservices approach to cover different aspects of Movie Booking 
    - Theatre Service : default port `8030`
    - Booking Service : default port `8040`
    
-   API configuration for Movie, Theatre, Booking Services can be accessed via `http://localhost:`{PORT}`/swagger-ui.html/`
+   API configuration for Movie, Theatre, Booking Services can be accessed via `http://localhost:{PORT}/swagger-ui.html/`
