@@ -7,12 +7,11 @@ import com.shrey.moviebooking.commons.enums.TheatreStatus;
  * @author Shrey
  *
  */
-public class Theatre extends DBEntity{
+public class Theatre extends DBEntity {
 
 	private long id;
 	private String name;
 	private long addressId;
-	private long contactId;
 	private TheatreStatus status = TheatreStatus.OPENED;
 
 	public long getId() {
@@ -37,14 +36,6 @@ public class Theatre extends DBEntity{
 
 	public void setAddressId(long addressId) {
 		this.addressId = addressId;
-	}
-
-	public long getContactId() {
-		return contactId;
-	}
-
-	public void setContactId(long contactId) {
-		this.contactId = contactId;
 	}
 
 	public TheatreStatus getStatus() {

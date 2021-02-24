@@ -11,7 +11,7 @@ public class Contact extends DBEntity{
 
 	private long id;
 	private ContactType contactType = ContactType.MOBILE;
-	private String number;
+	private String contact;
 
 	public long getId() {
 		return id;
@@ -29,12 +29,12 @@ public class Contact extends DBEntity{
 		this.contactType = contactType;
 	}
 
-	public String getNumber() {
-		return number;
+	public String getContact() {
+		return contact;
 	}
 
-	public void setNumber(String number) {
-		this.number = number;
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
 
 }

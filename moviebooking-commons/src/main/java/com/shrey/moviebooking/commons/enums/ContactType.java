@@ -7,6 +7,6 @@ package com.shrey.moviebooking.commons.enums;
  */
 public enum ContactType {
 
-	MOBILE;
+	MOBILE,EMAIL;
 
 }

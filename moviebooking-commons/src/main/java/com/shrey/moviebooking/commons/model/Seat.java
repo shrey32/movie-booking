@@ -9,7 +9,8 @@ public class Seat extends DBEntity{
 
 	private long id;
 	private long screenId;
-	private int row;
+	private long theatreId;
+	private String rowName;
 	private int seatNumber;
 
 	public long getId() {
@@ -28,12 +29,12 @@ public class Seat extends DBEntity{
 		this.screenId = screenId;
 	}
 
-	public int getRow() {
-		return row;
+	public String getRowName() {
+		return rowName;
 	}
 
-	public void setRow(int row) {
-		this.row = row;
+	public void setRowName(String rowName) {
+		this.rowName = rowName;
 	}
 
 	public int getSeatNumber() {
@@ -43,5 +44,15 @@ public class Seat extends DBEntity{
 	public void setSeatNumber(int seatNumber) {
 		this.seatNumber = seatNumber;
 	}
+
+	public long getTheatreId() {
+		return theatreId;
+	}
+
+	public void setTheatreId(long theatreId) {
+		this.theatreId = theatreId;
+	}
+	
+	
 
 }

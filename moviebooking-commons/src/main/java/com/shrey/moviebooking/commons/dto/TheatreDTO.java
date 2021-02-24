@@ -17,9 +17,8 @@ public class TheatreDTO {
 
 	private Theatre theatre;
 	private Address address;
-	private Contact contact;
-	private List<ScreenDTO> screens = new LinkedList<>();
-	
+	private List<Contact> contacts = new LinkedList<>();
+
 	public Theatre getTheatre() {
 		return theatre;
 	}
@@ -36,22 +35,12 @@ public class TheatreDTO {
 		this.address = address;
 	}
 
-	public Contact getContact() {
-		return contact;
+	public List<Contact> getContacts() {
+		return contacts;
 	}
 
-	public void setContact(Contact contact) {
-		this.contact = contact;
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
 	}
-
-	public List<ScreenDTO> getScreens() {
-		return screens;
-	}
-
-	public void setScreens(List<ScreenDTO> screens) {
-		this.screens = screens;
-	}
-
-	
 
 }
