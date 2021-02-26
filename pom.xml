@@ -13,7 +13,7 @@
 		<module>moviebooking-gateway</module>
 		<module>moviebooking-commons</module>
 		<module>moviebooking-movieservice</module>
-		<module>moviebooking-theatreservice</module>
+		<module>moviebooking-coreservice</module>
 		<module>moviebooking-bookingservice</module>
 	</modules>
 
