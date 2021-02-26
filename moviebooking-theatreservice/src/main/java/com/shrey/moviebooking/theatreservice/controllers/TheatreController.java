@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shrey.moviebooking.commons.dto.TheatreDTO;
 import com.shrey.moviebooking.commons.model.Theatre;
-import com.shrey.moviebooking.theatreservice.service.TheatreByAddressService;
 import com.shrey.moviebooking.theatreservice.service.TheatreDTOService;
+import com.shrey.moviebooking.theatreservice.service.TheatreService;
 import com.shrey.moviebooking.theatreservice.validation.TheatreDTOValidator;
 
 /**
@@ -41,7 +41,7 @@ public class TheatreController {
 	private TheatreDTOService theatreDTOService;
 
 	@Autowired
-	private TheatreByAddressService theatreByAddressService;
+	private TheatreService theatreService;
 
 	@Autowired
 	private TheatreDTOValidator theatreDTOValidator;
@@ -80,10 +80,10 @@ public class TheatreController {
 		return new ResponseEntity<TheatreDTO>(theatreDTObj, HttpStatus.OK);
 	}
 
-	@GetMapping("/address/{addressName}")
-	public List<Theatre> getAllTheatresForAddress(@PathVariable String addressName) {
-		log.info("Finding All Theatres By City/Pincode");
-		return theatreByAddressService.findAllTheatreByAddress(addressName);
+	@GetMapping("/city/{cityId}")
+	public List<Theatre> findAllByCityId(@PathVariable Long cityId) {
+		log.info("Request arrived to find all the theatres by CityId {" + cityId + "}");
+		return this.theatreService.findAllByCityId(cityId);
 	}
 
 }

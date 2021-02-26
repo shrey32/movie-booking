@@ -58,9 +58,9 @@ public class TheatreServiceImpl implements TheatreService {
 	}
 
 	@Override
-	public List<Theatre> findAllByAddressIdIn(List<Long> ids) {
-		log.info("finding a " + Theatre.class + " by AddressIds");
-		return this.theatreRepository.findAllByAddressIdIn(ids);
+	public List<Theatre> findAllByCityId(Long cityId) {
+		log.info("finding all " + Theatre.class + " by City Id {" + cityId + "}");
+		return this.theatreRepository.findAllByCityId(cityId);
 	}
 
 }

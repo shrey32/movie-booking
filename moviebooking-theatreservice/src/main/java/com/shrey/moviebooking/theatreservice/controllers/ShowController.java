@@ -25,10 +25,6 @@ public class ShowController {
 
 	
 	
-	@PostMapping
-	public ResponseEntity<Show> createShow(@Valid @RequestBody Optional<Show> show) {
-		if (show.isEmpty())
-			return new ResponseEntity<Show>(HttpStatus.BAD_REQUEST);
-	}
+	
 
 }

@@ -12,23 +12,20 @@
 				<generated-value strategy="IDENTITY" />
 			</id>
 			<column name="name" />
-			<column name="addressId" />
+			<column name="cityId" />
 			<column name="status" />
 			<column name="created"></column>
 			<column name="updated"></column>
 		</attributes>
 	</entity>
-	<entity class="com.shrey.moviebooking.commons.model.Address">
-		<table name="addresses" />
+	<entity class="com.shrey.moviebooking.commons.model.City">
+		<table name="cities" />
 		<schema name="theatresdb" />
 		<attributes>
 			<id name="id">
 				<generated-value strategy="IDENTITY" />
 			</id>
-			<column name="line1" />
-			<column name="line2" />
-			<column name="city" />
-			<column name="state" />
+			<column name="name" />
 			<column name="country" />
 			<column name="pincode" />
 			<column name="created"></column>

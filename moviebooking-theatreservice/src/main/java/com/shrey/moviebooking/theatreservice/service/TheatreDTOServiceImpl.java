@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shrey.moviebooking.commons.dto.TheatreDTO;
-import com.shrey.moviebooking.commons.model.Address;
+import com.shrey.moviebooking.commons.model.City;
 import com.shrey.moviebooking.commons.model.Contact;
 import com.shrey.moviebooking.commons.model.Theatre;
 import com.shrey.moviebooking.commons.model.TheatreContact;
@@ -21,12 +21,12 @@ import com.shrey.moviebooking.commons.model.TheatreContact;
 public class TheatreDTOServiceImpl implements TheatreDTOService {
 
 	private TheatreService theatreService;
-	private AddressService addressService;
+	private CityService addressService;
 	private ContactService contactService;
 	private TheatreContactService theatreContactService;
 
 	@Autowired
-	public TheatreDTOServiceImpl(TheatreService theatreService, AddressService addressService,
+	public TheatreDTOServiceImpl(TheatreService theatreService, CityService addressService,
 			ContactService contactService, TheatreContactService theatreContactService) {
 		this.theatreService = theatreService;
 		this.addressService = addressService;
@@ -37,11 +37,11 @@ public class TheatreDTOServiceImpl implements TheatreDTOService {
 	@Override
 	public TheatreDTO create(TheatreDTO theatreDTO) {
 		// Add Address
-		Address address = this.addressService.add(theatreDTO.getAddress());
-		theatreDTO.setAddress(address);
+		City address = this.addressService.add(theatreDTO.getCity());
+		theatreDTO.setCity(address);
 
 		// Add Theatre
-		theatreDTO.getTheatre().setAddressId(address.getId());
+		theatreDTO.getTheatre().setCityId(address.getId());
 
 		Theatre theatre = this.theatreService.add(theatreDTO.getTheatre());
 		theatreDTO.setTheatre(theatre);
@@ -62,7 +62,7 @@ public class TheatreDTOServiceImpl implements TheatreDTOService {
 
 			TheatreDTO theatreDTO = new TheatreDTO();
 
-			Address address = this.addressService.findById(theatre.getAddressId()).get();
+			City address = this.addressService.findById(theatre.getCityId()).get();
 
 			List<TheatreContact> theatreContacts = this.theatreContactService.findAllByTheatreId(theatre.getId());
 
@@ -71,7 +71,7 @@ public class TheatreDTOServiceImpl implements TheatreDTOService {
 				theatreDTO.getContacts().add(contact);
 			}
 			theatreDTO.setTheatre(theatre);
-			theatreDTO.setAddress(address);
+			theatreDTO.setCity(address);
 
 			return Optional.of(theatreDTO);
 		}
@@ -86,11 +86,11 @@ public class TheatreDTOServiceImpl implements TheatreDTOService {
 		if (optionalTheatre.isPresent()) {
 			Theatre theatre = this.theatreService.add(optionalTheatre.get());
 			// Finding Address
-			Address address = this.addressService.findById(theatre.getAddressId()).get();
+			City address = this.addressService.findById(theatre.getCityId()).get();
 
-			theatreDTO.getAddress().setId(address.getId());
+			theatreDTO.getCity().setId(address.getId());
 
-			address = this.addressService.update(theatreDTO.getAddress());
+			address = this.addressService.update(theatreDTO.getCity());
 
 			List<TheatreContact> theatreContacts = this.theatreContactService.findAllByTheatreId(theatre.getId());
 
@@ -104,7 +104,7 @@ public class TheatreDTOServiceImpl implements TheatreDTOService {
 			List<Contact> contacts = addContacts(theatre.getId(), theatreDTO.getContacts());
 
 			theatreDTO.setTheatre(theatre);
-			theatreDTO.setAddress(address);
+			theatreDTO.setCity(address);
 			theatreDTO.setContacts(contacts);
 		}
 		return theatreDTO;

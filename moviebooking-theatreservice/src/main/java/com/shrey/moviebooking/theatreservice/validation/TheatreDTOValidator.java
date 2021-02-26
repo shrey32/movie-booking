@@ -27,20 +27,17 @@ public class TheatreDTOValidator implements Validator<TheatreDTO> {
 			throw new InvalidRequestException("Empty request found!");
 		if (theatreDTO.getTheatre() == null)
 			throw new InvalidRequestException("No Theatre Found in the request");
-		if (theatreDTO.getAddress() == null)
+		if (theatreDTO.getCity() == null)
 			throw new InvalidRequestException("Theatre Address is not found");
 		if (StringUtils.isEmpty(theatreDTO.getTheatre().getName()))
 			throw new InvalidRequestException("No Theatre Name is not found");
 		if (theatreDTO.getContacts().isEmpty())
 			throw new InvalidRequestException("No Theatre Contact, Add atleast one Contact");
-		if (StringUtils.isEmpty(theatreDTO.getAddress().getLine1())
-				&& StringUtils.isEmpty(theatreDTO.getAddress().getLine2()))
-			throw new InvalidRequestException("Address is Empty");
-		if (StringUtils.isEmpty(theatreDTO.getAddress().getCity()))
-			throw new InvalidRequestException("Theatre City is blank!");
-		if (StringUtils.isEmpty(theatreDTO.getAddress().getCountry()))
+		if (StringUtils.isEmpty(theatreDTO.getCity().getName()))
+			throw new InvalidRequestException("Theatre City Name is blank!");
+		if (StringUtils.isEmpty(theatreDTO.getCity().getCountry()))
 			throw new InvalidRequestException("Theatre Country is blank!");
-		if (StringUtils.isEmpty(theatreDTO.getAddress().getPincode()))
+		if (StringUtils.isEmpty(theatreDTO.getCity().getPincode()))
 			throw new InvalidRequestException("Theatre Pincode is blank!");
 
 		for (Contact contact : theatreDTO.getContacts()) {

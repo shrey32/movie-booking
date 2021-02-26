@@ -18,6 +18,7 @@ public interface TheatreService {
 
 	boolean deleteById(Long theatreId);
 	
-	List<Theatre> findAllByAddressIdIn(List<Long> ids);
+	List<Theatre> findAllByCityId(Long cityId);
+	
 	
 }

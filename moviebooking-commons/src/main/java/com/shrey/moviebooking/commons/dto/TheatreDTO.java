@@ -5,7 +5,7 @@ import com.shrey.moviebooking.commons.model.Theatre;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.shrey.moviebooking.commons.model.Address;
+import com.shrey.moviebooking.commons.model.City;
 import com.shrey.moviebooking.commons.model.Contact;
 
 /**
@@ -16,7 +16,7 @@ import com.shrey.moviebooking.commons.model.Contact;
 public class TheatreDTO {
 
 	private Theatre theatre;
-	private Address address;
+	private City city;
 	private List<Contact> contacts = new LinkedList<>();
 
 	public Theatre getTheatre() {
@@ -27,12 +27,12 @@ public class TheatreDTO {
 		this.theatre = theatre;
 	}
 
-	public Address getAddress() {
-		return address;
+	public City getCity() {
+		return city;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setCity(City city) {
+		this.city = city;
 	}
 
 	public List<Contact> getContacts() {

@@ -11,7 +11,7 @@ public class Theatre extends DBEntity {
 
 	private long id;
 	private String name;
-	private long addressId;
+	private long cityId;
 	private TheatreStatus status = TheatreStatus.OPENED;
 
 	public long getId() {
@@ -30,12 +30,12 @@ public class Theatre extends DBEntity {
 		this.name = name;
 	}
 
-	public long getAddressId() {
-		return addressId;
+	public long getCityId() {
+		return cityId;
 	}
 
-	public void setAddressId(long addressId) {
-		this.addressId = addressId;
+	public void setCityId(long cityId) {
+		this.cityId = cityId;
 	}
 
 	public TheatreStatus getStatus() {
