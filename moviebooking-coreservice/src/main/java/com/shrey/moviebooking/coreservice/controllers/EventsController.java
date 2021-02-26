@@ -30,7 +30,7 @@ import com.shrey.moviebooking.coreservice.validation.EventValidator;
  *
  */
 @RestController()
-@RequestMapping("/theatreservice/events")
+@RequestMapping("/coreservice/events")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class EventsController {
 

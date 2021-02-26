@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.shrey.moviebooking.commons.model.Show;
 
 @RestController()
-@RequestMapping("/theatreservice/shows")
+@RequestMapping("/coreservice/shows")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class ShowController {
 

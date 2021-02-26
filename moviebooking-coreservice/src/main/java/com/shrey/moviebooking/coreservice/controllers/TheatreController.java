@@ -31,7 +31,7 @@ import com.shrey.moviebooking.coreservice.validation.TheatreDTOValidator;
  *
  */
 @RestController()
-@RequestMapping("/theatreservice/theatres")
+@RequestMapping("/coreservice/theatres")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class TheatreController {
 

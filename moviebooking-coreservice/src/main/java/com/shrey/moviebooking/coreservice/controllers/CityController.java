@@ -19,7 +19,7 @@ import com.shrey.moviebooking.coreservice.service.CityService;
  *
  */
 @RestController()
-@RequestMapping("/theatreservice/cities")
+@RequestMapping("/coreservice/cities")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class CityController {
 
