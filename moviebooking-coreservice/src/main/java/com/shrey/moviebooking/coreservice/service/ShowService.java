@@ -3,7 +3,7 @@ package com.shrey.moviebooking.coreservice.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.shrey.moviebooking.commons.model.Show;
+import com.shrey.moviebooking.coreservice.models.Show;
 
 /**
  * 
@@ -22,4 +22,7 @@ public interface ShowService {
 	
 	List<Show> findAllByTheatreId(Long theatreId);
 	
+	List<Show> findAllByEventId(Long eventId);
+	
+	List<Show> findAllByEventIdAndTheatreId(Long eventId, Long theatreId);
 }

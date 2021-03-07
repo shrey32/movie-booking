@@ -1,6 +1,5 @@
 package com.shrey.moviebooking.coreservice.service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shrey.moviebooking.commons.model.TheatreContact;
+import com.shrey.moviebooking.coreservice.models.TheatreContact;
+import com.shrey.moviebooking.commons.utils.DateUtils;
 import com.shrey.moviebooking.coreservice.repository.TheatreContactRepository;
 
 /**
@@ -32,7 +32,7 @@ public class TheatreContactServiceImpl implements TheatreContactService {
 	@Override
 	public TheatreContact add(TheatreContact theatre) {
 		log.info("Adding a new " + TheatreContact.class + " {" + theatre + "}");
-		theatre.setCreated(new Date());
+		theatre.setCreated(DateUtils.dbAuditDateTime());
 		return this.theatreContactRepository.save(theatre);
 	}
 

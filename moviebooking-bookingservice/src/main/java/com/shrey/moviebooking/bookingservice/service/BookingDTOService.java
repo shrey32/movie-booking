@@ -2,7 +2,7 @@ package com.shrey.moviebooking.bookingservice.service;
 
 import java.util.Optional;
 
-import com.shrey.moviebooking.commons.dto.BookingDTO;
+import com.shrey.moviebooking.bookingservice.dto.BookingDTO;
 
 /**
  * 

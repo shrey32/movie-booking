@@ -1,6 +1,5 @@
-package com.shrey.moviebooking.movieservice.controllers;
+package com.shrey.moviebooking.metadataservice.controllers;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -18,11 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shrey.moviebooking.commons.dto.MovieDTO;
-import com.shrey.moviebooking.commons.model.Movie;
-import com.shrey.moviebooking.commons.validator.Validator;
-import com.shrey.moviebooking.movieservice.service.MovieDTOService;
-import com.shrey.moviebooking.movieservice.service.MovieService;
+import com.shrey.moviebooking.metadataservice.models.EventMetaData;
+import com.shrey.moviebooking.metadataservice.service.EventMetaDataService;
 
 /**
  * 
@@ -30,63 +26,39 @@ import com.shrey.moviebooking.movieservice.service.MovieService;
  *
  */
 @RestController()
-@RequestMapping("/movieservice/movies")
+@RequestMapping("/metadataservice/events")
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class MoviesController {
+public class EventsMetadataController {
 
-	private static final Logger logger = LoggerFactory.getLogger(MoviesController.class);
-
-	@Autowired
-	private MovieDTOService movieDTOService;
+	private static final Logger log = LoggerFactory.getLogger(EventsMetadataController.class);
 
 	@Autowired
-	private MovieService movieService;
-
-	@Autowired
-	private Validator<MovieDTO> movieDTOValidator;
+	private EventMetaDataService eventMetaDataService;
 
 	@PostMapping
-	public ResponseEntity<MovieDTO> createNewMovie(@Valid @RequestBody Optional<MovieDTO> optionalMovieDTO) {
+	public ResponseEntity<EventMetaData> addEventMetaData(@Valid @RequestBody Optional<EventMetaData> eventMetaData) {
+		log.info("Request to Add " + EventMetaData.class + " Arrived");
+		if (eventMetaData.isEmpty())
+			return new ResponseEntity<EventMetaData>(HttpStatus.BAD_REQUEST);
 
-		if (optionalMovieDTO.isEmpty())
-			return new ResponseEntity<MovieDTO>(HttpStatus.BAD_REQUEST);
-		MovieDTO movieDTO = optionalMovieDTO.get();
-		
-		this.movieDTOValidator.validate(movieDTO);
+		EventMetaData metadata = eventMetaData.get();
 
-		movieDTO = movieDTOService.add(movieDTO);
+		log.info(EventMetaData.class + "{ " + metadata + "}");
 
-		return new ResponseEntity<MovieDTO>(movieDTO, HttpStatus.OK);
+		metadata = eventMetaDataService.add(metadata);
+
+		return new ResponseEntity<EventMetaData>(metadata, HttpStatus.OK);
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<Movie> getMovieById(@PathVariable long id) {
-		logger.info("finding movie by {" + id + "}");
-		Optional<Movie> movie = this.movieService.findById(id);
-		if (movie.isPresent()) {
-			logger.info("movie found!!! {" + id + "}");
-			return new ResponseEntity<Movie>(movie.get(), HttpStatus.OK);
+	@GetMapping("/{eventId}")
+	public ResponseEntity<EventMetaData> getMetaDataByEventId(@PathVariable long eventId) {
+		log.info("finding movie by {" + eventId + "}");
+		Optional<EventMetaData> metadata = this.eventMetaDataService.findByEventId(eventId);
+		if (metadata.isPresent()) {
+			log.info("Event MetaData found!!! {" + metadata.get() + "}");
+			return new ResponseEntity<EventMetaData>(metadata.get(), HttpStatus.OK);
 		}
-		return new ResponseEntity<Movie>(HttpStatus.NOT_FOUND);
-	}
-
-	@GetMapping("/details/{id}")
-	public ResponseEntity<MovieDTO> getMovieDetailsById(@PathVariable long id) {
-		logger.info("finding movie details by {" + id + "}");
-		Optional<MovieDTO> movie = this.movieDTOService.findById(id);
-		if (movie.isPresent()) {
-			logger.info("movie details found!!! {" + id + "}");
-			return new ResponseEntity<MovieDTO>(movie.get(), HttpStatus.OK);
-		}
-		return new ResponseEntity<MovieDTO>(HttpStatus.NOT_FOUND);
-	}
-
-	@GetMapping
-	public List<Movie> getAllMovies() {
-		logger.info("finding all movies");
-		List<Movie> movies = this.movieService.findAll();
-		logger.info("Movie List with size {" + movies.size() + "} is returned");
-		return movies;
+		return new ResponseEntity<EventMetaData>(HttpStatus.NOT_FOUND);
 	}
 
 }

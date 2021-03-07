@@ -1,16 +1,19 @@
 
 CREATE TABLE cities(id BIGINT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(25) NOT NULL,country VARCHAR(20) NOT NULL,pincode VARCHAR(10) NOT NULL,created TIMESTAMP,updated TIMESTAMP);
 
-
 CREATE TABLE theatres(id BIGINT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(30), cityId BIGINT NOT NULL, status VARCHAR(12),created TIMESTAMP,updated TIMESTAMP,
-    CONSTRAINT fk_theatre_1 FOREIGN KEY(addressId) REFERENCES addresses(id));
+    CONSTRAINT fk_theatre_1 FOREIGN KEY(cityId) REFERENCES cities(id));
 
+CREATE TABLE events(id BIGINT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(30) NOT NULL, cityId BIGINT NOT NULL, durationInMinutes INT, eventType VARCHAR(12), 
+    startDate TIMESTAMP,created TIMESTAMP,updated TIMESTAMP,
+    CONSTRAINT fk_events_1 FOREIGN KEY(cityId) REFERENCES cities(id));    
+    
 CREATE TABLE contacts(id BIGINT PRIMARY KEY AUTO_INCREMENT, contactType VARCHAR(6) NOT NULL,contact VARCHAR,created TIMESTAMP,updated TIMESTAMP);
 
-CREATE TABLE theatrecontact(id BIGINT PRIMARY KEY AUTO_INCREMENT, theatreId BIGINT NOT NULL,contactId BIGINT NOT NULL,created TIMESTAMP,updated TIMESTAMP,
-CONSTRAINT fk_theatrecontact_1 FOREIGN KEY(theatreId) REFERENCES theatres(id),
-CONSTRAINT fk_theatrecontact_2 FOREIGN KEY(contactId) REFERENCES contacts(id));
+CREATE TABLE theatrecontacts(id BIGINT PRIMARY KEY AUTO_INCREMENT, theatreId BIGINT NOT NULL,contactId BIGINT NOT NULL,created TIMESTAMP,updated TIMESTAMP,
+CONSTRAINT fk_theatrecontacts_1 FOREIGN KEY(theatreId) REFERENCES theatres(id),
+CONSTRAINT fk_theatrecontacts_2 FOREIGN KEY(contactId) REFERENCES contacts(id));
 
 CREATE TABLE screens(id BIGINT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(20) NOT NULL, theatreId BIGINT NOT NULL,capacity INT, created TIMESTAMP,updated TIMESTAMP,
 CONSTRAINT fk_screen_1 FOREIGN KEY(theatreId) REFERENCES theatres(id));  

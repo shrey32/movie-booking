@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shrey.moviebooking.commons.dto.TheatreDTO;
-import com.shrey.moviebooking.commons.model.Theatre;
+import com.shrey.moviebooking.coreservice.dto.TheatreDTO;
+import com.shrey.moviebooking.coreservice.models.Theatre;
 import com.shrey.moviebooking.coreservice.service.TheatreDTOService;
 import com.shrey.moviebooking.coreservice.service.TheatreService;
 import com.shrey.moviebooking.coreservice.validation.TheatreDTOValidator;
@@ -80,10 +80,15 @@ public class TheatreController {
 		return new ResponseEntity<TheatreDTO>(theatreDTObj, HttpStatus.OK);
 	}
 
-	@GetMapping("/city/{cityId}")
+	@GetMapping("/{cityId}")
 	public List<Theatre> findAllByCityId(@PathVariable Long cityId) {
 		log.info("Request arrived to find all the theatres by CityId {" + cityId + "}");
 		return this.theatreService.findAllByCityId(cityId);
 	}
 
+	@GetMapping("/{cityId}/{eventId}")
+	private List<Theatre> findAllByCityIdAndEventId(@PathVariable Long cityId, @PathVariable Long eventId) {
+		log.info("Request arrived to find all the theatres by CityId {" + cityId + "} and EventId {" + eventId + "}");
+		return this.theatreDTOService.findAllByCityAndEvent(cityId, eventId);
+	}
 }

@@ -1,6 +1,5 @@
 package com.shrey.moviebooking.coreservice.service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shrey.moviebooking.commons.model.City;
+import com.shrey.moviebooking.coreservice.models.City;
+import com.shrey.moviebooking.commons.utils.DateUtils;
 import com.shrey.moviebooking.coreservice.repository.CityRepository;
 
 /**
@@ -32,7 +32,7 @@ public class CityServiceImpl implements CityService {
 	@Override
 	public City add(City city) {
 		log.info("Adding new " + City.class + " {" + city + "}");
-		city.setCreated(new Date());
+		city.setCreated(DateUtils.dbAuditDateTime());
 		return this.cityRepository.save(city);
 	}
 
@@ -57,7 +57,7 @@ public class CityServiceImpl implements CityService {
 			log.info("Found " + City.class + " {" + city.getId() + "}");
 			city.setId(optionalcity.get().getId());
 			city.setCreated(optionalcity.get().getCreated());
-			city.setUpdated(new Date());
+			city.setUpdated(DateUtils.dbAuditDateTime());
 			return this.add(city);
 		}
 		return null;

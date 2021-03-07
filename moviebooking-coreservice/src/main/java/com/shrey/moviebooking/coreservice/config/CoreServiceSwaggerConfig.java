@@ -19,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-public class TheatreServiceSwaggerConfig {
+public class CoreServiceSwaggerConfig {
 
 	@Value("${swagger.host.url}")
 	private String hostUrl;
@@ -27,13 +27,13 @@ public class TheatreServiceSwaggerConfig {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).host(hostUrl).apiInfo(apiInfo()).select()
-				.apis(RequestHandlerSelectors.basePackage("com.shrey.moviebooking.theatreservice.controllers"))
+				.apis(RequestHandlerSelectors.basePackage("com.shrey.moviebooking.coreservice.controllers"))
 				.paths(PathSelectors.any()).build();
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("Theatre Service API")
-				.description("Theatre Service API reference for developers").version("0.1").build();
+		return new ApiInfoBuilder().title("Movie Booking Core Service API")
+				.description("Movie Booking Core Service API reference for developers").version("0.1").build();
 	}
 
 }

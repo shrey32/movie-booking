@@ -4,10 +4,10 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.shrey.moviebooking.commons.dto.TheatreDTO;
-import com.shrey.moviebooking.commons.enums.ContactType;
+import com.shrey.moviebooking.coreservice.dto.TheatreDTO;
+import com.shrey.moviebooking.coreservice.enums.ContactType;
 import com.shrey.moviebooking.commons.exception.InvalidRequestException;
-import com.shrey.moviebooking.commons.model.Contact;
+import com.shrey.moviebooking.coreservice.models.Contact;
 import com.shrey.moviebooking.commons.utils.MovieBookingUtility;
 import com.shrey.moviebooking.commons.validator.Validator;
 

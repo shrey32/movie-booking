@@ -12,9 +12,10 @@
 		<module>moviebooking-namingserver</module>
 		<module>moviebooking-gateway</module>
 		<module>moviebooking-commons</module>
-		<module>moviebooking-movieservice</module>
+		<module>moviebooking-metadataservice</module>
 		<module>moviebooking-coreservice</module>
 		<module>moviebooking-bookingservice</module>
+		<module>moviebooking-authserver</module>
 	</modules>
 
 	<parent>
@@ -64,6 +65,7 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>

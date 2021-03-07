@@ -1,6 +1,5 @@
 package com.shrey.moviebooking.bookingservice.service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +11,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shrey.moviebooking.bookingservice.repository.BookedSeatRepository;
-import com.shrey.moviebooking.commons.model.BookedSeat;
+import com.shrey.moviebooking.bookingservice.models.BookedSeat;
+import com.shrey.moviebooking.commons.utils.DateUtils;
 
 /**
  * 
@@ -35,7 +35,7 @@ public class BookedSeatServiceImpl implements BookedSeatService {
 	@Transactional
 	public BookedSeat create(BookedSeat bookedSeat) {
 		log.info("Adding a new BookSeat " + bookedSeat);
-		bookedSeat.setCreated(new Date());
+		bookedSeat.setCreated(DateUtils.dbAuditDateTime());
 		return this.bookedSeatRepository.save(bookedSeat);
 	}
 

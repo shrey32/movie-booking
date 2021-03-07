@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.shrey.moviebooking.commons.dto.BookingDTO;
-import com.shrey.moviebooking.commons.model.BookedSeat;
-import com.shrey.moviebooking.commons.model.Booking;
+import com.shrey.moviebooking.bookingservice.dto.BookingDTO;
+import com.shrey.moviebooking.bookingservice.models.BookedSeat;
+import com.shrey.moviebooking.bookingservice.models.Booking;
 
 /**
  * 

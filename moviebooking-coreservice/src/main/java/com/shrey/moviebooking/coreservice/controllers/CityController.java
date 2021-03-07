@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shrey.moviebooking.commons.model.City;
+import com.shrey.moviebooking.coreservice.models.City;
 import com.shrey.moviebooking.coreservice.service.CityService;
 
 /**

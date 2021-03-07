@@ -1,6 +1,5 @@
 package com.shrey.moviebooking.coreservice.service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shrey.moviebooking.commons.model.Screen;
+import com.shrey.moviebooking.coreservice.models.Screen;
+import com.shrey.moviebooking.commons.utils.DateUtils;
 import com.shrey.moviebooking.coreservice.repository.ScreenRepository;
 
 /**
@@ -32,7 +32,7 @@ public class ScreenServiceImpl implements ScreenService {
 	@Override
 	public Screen add(Screen screen) {
 		log.info("Adding new " + Screen.class + " {" + screen + "}");
-		screen.setCreated(new Date());
+		screen.setCreated(DateUtils.dbAuditDateTime());
 		return this.screenRepository.save(screen);
 	}
 

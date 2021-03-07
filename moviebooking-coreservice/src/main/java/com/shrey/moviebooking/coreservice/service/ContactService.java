@@ -2,7 +2,7 @@ package com.shrey.moviebooking.coreservice.service;
 
 import java.util.Optional;
 
-import com.shrey.moviebooking.commons.model.Contact;
+import com.shrey.moviebooking.coreservice.models.Contact;
 
 /**
  * 

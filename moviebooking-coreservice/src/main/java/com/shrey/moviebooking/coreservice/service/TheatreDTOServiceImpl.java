@@ -1,16 +1,18 @@
 package com.shrey.moviebooking.coreservice.service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shrey.moviebooking.commons.dto.TheatreDTO;
-import com.shrey.moviebooking.commons.model.City;
-import com.shrey.moviebooking.commons.model.Contact;
-import com.shrey.moviebooking.commons.model.Theatre;
-import com.shrey.moviebooking.commons.model.TheatreContact;
+import com.shrey.moviebooking.coreservice.dto.TheatreDTO;
+import com.shrey.moviebooking.coreservice.models.City;
+import com.shrey.moviebooking.coreservice.models.Contact;
+import com.shrey.moviebooking.coreservice.models.Show;
+import com.shrey.moviebooking.coreservice.models.Theatre;
+import com.shrey.moviebooking.coreservice.models.TheatreContact;
 
 /**
  * 
@@ -21,27 +23,29 @@ import com.shrey.moviebooking.commons.model.TheatreContact;
 public class TheatreDTOServiceImpl implements TheatreDTOService {
 
 	private TheatreService theatreService;
-	private CityService addressService;
+	private CityService cityService;
 	private ContactService contactService;
+	private ShowService showService;
 	private TheatreContactService theatreContactService;
 
 	@Autowired
-	public TheatreDTOServiceImpl(TheatreService theatreService, CityService addressService,
-			ContactService contactService, TheatreContactService theatreContactService) {
+	public TheatreDTOServiceImpl(TheatreService theatreService, CityService cityService, ContactService contactService,
+			TheatreContactService theatreContactService, ShowService showService) {
 		this.theatreService = theatreService;
-		this.addressService = addressService;
+		this.cityService = cityService;
 		this.contactService = contactService;
 		this.theatreContactService = theatreContactService;
+		this.showService = showService;
 	}
 
 	@Override
 	public TheatreDTO create(TheatreDTO theatreDTO) {
 		// Add Address
-		City address = this.addressService.add(theatreDTO.getCity());
-		theatreDTO.setCity(address);
+		City city = this.cityService.add(theatreDTO.getCity());
+		theatreDTO.setCity(city);
 
 		// Add Theatre
-		theatreDTO.getTheatre().setCityId(address.getId());
+		theatreDTO.getTheatre().setCityId(city.getId());
 
 		Theatre theatre = this.theatreService.add(theatreDTO.getTheatre());
 		theatreDTO.setTheatre(theatre);
@@ -62,7 +66,7 @@ public class TheatreDTOServiceImpl implements TheatreDTOService {
 
 			TheatreDTO theatreDTO = new TheatreDTO();
 
-			City address = this.addressService.findById(theatre.getCityId()).get();
+			City city = this.cityService.findById(theatre.getCityId()).get();
 
 			List<TheatreContact> theatreContacts = this.theatreContactService.findAllByTheatreId(theatre.getId());
 
@@ -71,7 +75,7 @@ public class TheatreDTOServiceImpl implements TheatreDTOService {
 				theatreDTO.getContacts().add(contact);
 			}
 			theatreDTO.setTheatre(theatre);
-			theatreDTO.setCity(address);
+			theatreDTO.setCity(city);
 
 			return Optional.of(theatreDTO);
 		}
@@ -86,15 +90,15 @@ public class TheatreDTOServiceImpl implements TheatreDTOService {
 		if (optionalTheatre.isPresent()) {
 			Theatre theatre = this.theatreService.add(optionalTheatre.get());
 			// Finding Address
-			City address = this.addressService.findById(theatre.getCityId()).get();
+			City city = this.cityService.findById(theatre.getCityId()).get();
 
-			theatreDTO.getCity().setId(address.getId());
+			theatreDTO.getCity().setId(city.getId());
 
-			address = this.addressService.update(theatreDTO.getCity());
+			city = this.cityService.update(theatreDTO.getCity());
 
 			List<TheatreContact> theatreContacts = this.theatreContactService.findAllByTheatreId(theatre.getId());
 
-			//deleting existing
+			// deleting existing
 			for (TheatreContact theatreContact : theatreContacts) {
 				this.theatreContactService.deleteById(theatreContact.getId());
 				this.contactService.deleteById(theatreContact.getContactId());
@@ -104,10 +108,22 @@ public class TheatreDTOServiceImpl implements TheatreDTOService {
 			List<Contact> contacts = addContacts(theatre.getId(), theatreDTO.getContacts());
 
 			theatreDTO.setTheatre(theatre);
-			theatreDTO.setCity(address);
+			theatreDTO.setCity(city);
 			theatreDTO.setContacts(contacts);
 		}
 		return theatreDTO;
+	}
+
+	@Override
+	public List<Theatre> findAllByCityAndEvent(Long cityId, Long eventId) {
+		List<Theatre> theatresByCity = this.theatreService.findAllByCityId(cityId);
+		List<Theatre> theatresByCityAndEvent = new LinkedList<>();
+		for (Theatre theatre : theatresByCity) {
+			List<Show> show = this.showService.findAllByEventIdAndTheatreId(eventId, theatre.getId());
+			if (!show.isEmpty())
+				theatresByCityAndEvent.add(theatre);
+		}
+		return theatresByCityAndEvent;
 	}
 
 	/**

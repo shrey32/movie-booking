@@ -1,6 +1,5 @@
 package com.shrey.moviebooking.coreservice.service;
 
-import java.util.Date;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -8,7 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shrey.moviebooking.commons.model.Contact;
+import com.shrey.moviebooking.coreservice.models.Contact;
+import com.shrey.moviebooking.commons.utils.DateUtils;
 import com.shrey.moviebooking.coreservice.repository.ContactRepository;
 
 /**
@@ -31,7 +31,8 @@ public class ContactServiceImpl implements ContactService {
 	@Override
 	public Contact add(Contact contact) {
 		log.info("Adding new " + Contact.class + " {" + contact + "}");
-		return null;
+		contact.setCreated(DateUtils.dbAuditDateTime());
+		return this.contactRepository.save(contact);
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class ContactServiceImpl implements ContactService {
 			log.info("Found " + Contact.class + " {" + contact.getId() + "}");
 			contact.setId(optionalContact.get().getId());
 			contact.setCreated(optionalContact.get().getCreated());
-			contact.setUpdated(new Date());
+			contact.setUpdated(DateUtils.dbAuditDateTime());
 			return this.add(contact);
 		}
 		return null;

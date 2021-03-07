@@ -3,7 +3,7 @@ package com.shrey.moviebooking.bookingservice.validation;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.shrey.moviebooking.commons.dto.BookingDTO;
+import com.shrey.moviebooking.bookingservice.dto.BookingDTO;
 import com.shrey.moviebooking.commons.exception.InvalidRequestException;
 import com.shrey.moviebooking.commons.validator.Validator;
 

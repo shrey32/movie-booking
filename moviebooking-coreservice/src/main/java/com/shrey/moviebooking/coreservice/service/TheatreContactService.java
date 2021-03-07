@@ -3,7 +3,7 @@ package com.shrey.moviebooking.coreservice.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.shrey.moviebooking.commons.model.TheatreContact;
+import com.shrey.moviebooking.coreservice.models.TheatreContact;
 
 /**
  * 

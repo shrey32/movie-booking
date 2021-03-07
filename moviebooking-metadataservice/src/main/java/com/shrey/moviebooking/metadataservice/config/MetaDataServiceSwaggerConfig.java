@@ -1,4 +1,4 @@
-package com.shrey.moviebooking.movieservice.config;
+package com.shrey.moviebooking.metadataservice.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-public class MovieServiceSwaggerConfig {
+public class MetaDataServiceSwaggerConfig {
 
 	@Value("${swagger.host.url}")
 	private String hostUrl;
@@ -27,12 +27,12 @@ public class MovieServiceSwaggerConfig {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).host(hostUrl).apiInfo(apiInfo()).select()
-				.apis(RequestHandlerSelectors.basePackage("com.shrey.moviebooking.movieservice.controllers"))
+				.apis(RequestHandlerSelectors.basePackage("com.shrey.moviebooking.metadataservice.controllers"))
 				.paths(PathSelectors.any()).build();
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("Movie Service API").description("Movie Service API reference for developers")
+		return new ApiInfoBuilder().title("MetaData Service API").description("MetaData Service API reference for developers")
 				.version("0.1").build();
 	}
 

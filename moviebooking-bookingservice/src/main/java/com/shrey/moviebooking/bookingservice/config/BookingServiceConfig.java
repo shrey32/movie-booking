@@ -27,7 +27,7 @@ public class BookingServiceConfig {
 	@Bean("bookingServiceEntityManagerFactory")
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("dataSource") DataSource dataSource,
 			EntityManagerFactoryBuilder builder) {
-		return builder.dataSource(dataSource).mappingResources("mappings.xml").persistenceUnit("H2DB").build();
+		return builder.dataSource(dataSource).packages("com.shrey.moviebooking.bookingservice.models").persistenceUnit("H2DB").build();
 	}
 
 	@Bean("transactionManager")

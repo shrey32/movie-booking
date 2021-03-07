@@ -1,6 +1,5 @@
 package com.shrey.moviebooking.bookingservice.service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,8 +11,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shrey.moviebooking.bookingservice.repository.BookingRepository;
-import com.shrey.moviebooking.commons.enums.BookingStatus;
-import com.shrey.moviebooking.commons.model.Booking;
+import com.shrey.moviebooking.bookingservice.enums.BookingStatus;
+import com.shrey.moviebooking.bookingservice.models.Booking;
+import com.shrey.moviebooking.commons.utils.DateUtils;
 
 /**
  * 
@@ -36,7 +36,7 @@ public class BookingServiceImpl implements BookingService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Booking create(Booking booking) {
 		log.info("Adding a new Booking " + booking);
-		booking.setCreated(new Date());
+		booking.setCreated(DateUtils.dbAuditDateTime());
 		booking.setStatus(BookingStatus.ACTIVE);
 		return this.bookingRepository.save(booking);
 	}
@@ -65,7 +65,7 @@ public class BookingServiceImpl implements BookingService {
 		if (optionalBooking.isPresent()) {
 			log.info("Found Booking to Cancel {" + bookingId + "}");
 			Booking booking = optionalBooking.get();
-			booking.setUpdated(new Date());
+			booking.setUpdated(DateUtils.dbAuditDateTime());
 			booking.setStatus(BookingStatus.CANCELLED);
 			return Optional.of(this.create(booking));
 		}

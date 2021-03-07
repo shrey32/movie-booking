@@ -1,6 +1,5 @@
 package com.shrey.moviebooking.coreservice.service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shrey.moviebooking.commons.model.Seat;
+import com.shrey.moviebooking.coreservice.models.Seat;
+import com.shrey.moviebooking.commons.utils.DateUtils;
 import com.shrey.moviebooking.coreservice.repository.SeatRepository;
 
 /**
@@ -32,7 +32,7 @@ public class SeatServiceImpl implements SeatService {
 	@Override
 	public Seat add(Seat seat) {
 		log.info("Adding new " + Seat.class + " {" + seat + "}");
-		seat.setCreated(new Date());
+		seat.setCreated(DateUtils.dbAuditDateTime());
 		return this.seatRepository.save(seat);
 	}
 

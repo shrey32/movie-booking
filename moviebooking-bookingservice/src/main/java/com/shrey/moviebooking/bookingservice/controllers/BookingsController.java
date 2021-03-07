@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shrey.moviebooking.bookingservice.service.BookingDTOService;
 import com.shrey.moviebooking.bookingservice.service.BookingService;
-import com.shrey.moviebooking.commons.dto.BookingDTO;
-import com.shrey.moviebooking.commons.model.Booking;
+import com.shrey.moviebooking.bookingservice.dto.BookingDTO;
+import com.shrey.moviebooking.bookingservice.models.Booking;
 import com.shrey.moviebooking.commons.validator.Validator;
 
 /**

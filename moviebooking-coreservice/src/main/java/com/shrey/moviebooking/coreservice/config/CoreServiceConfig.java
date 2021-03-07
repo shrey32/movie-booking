@@ -22,12 +22,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories(entityManagerFactoryRef = "theatreServiceEntityManagerFactory", transactionManagerRef = "transactionManager", basePackages = {
 		"com.shrey.moviebooking" })
-public class TheatreServiceConfig {
+public class CoreServiceConfig {
 
 	@Bean("theatreServiceEntityManagerFactory")
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("dataSource") DataSource dataSource,
 			EntityManagerFactoryBuilder builder) {
-		return builder.dataSource(dataSource).mappingResources("mappings.xml").persistenceUnit("H2DB").build();
+		return builder.dataSource(dataSource).packages("com.shrey.moviebooking.coreservice.models").persistenceUnit("H2DB").build();
 	}
 
 	@Bean("transactionManager")

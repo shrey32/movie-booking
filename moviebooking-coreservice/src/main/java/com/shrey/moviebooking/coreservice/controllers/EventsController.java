@@ -1,6 +1,7 @@
 package com.shrey.moviebooking.coreservice.controllers;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -19,10 +20,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shrey.moviebooking.commons.enums.EventType;
-import com.shrey.moviebooking.commons.model.Event;
+import com.shrey.moviebooking.coreservice.dto.EventDTO;
+import com.shrey.moviebooking.coreservice.enums.EventType;
+import com.shrey.moviebooking.coreservice.models.Event;
+import com.shrey.moviebooking.coreservice.service.EventDTOService;
+import com.shrey.moviebooking.coreservice.service.EventMetaDataService;
 import com.shrey.moviebooking.coreservice.service.EventService;
-import com.shrey.moviebooking.coreservice.validation.EventValidator;
+import com.shrey.moviebooking.coreservice.validation.EventDTOValidator;
 
 /**
  * 
@@ -40,20 +44,32 @@ public class EventsController {
 	private EventService eventService;
 
 	@Autowired
-	private EventValidator eventValidator;
+	private EventDTOService eventDTOService;
+
+	@Autowired
+	private EventMetaDataService eventMetaDataService;
+
+	@Autowired
+	private EventDTOValidator eventDTOValidator;
 
 	@PostMapping
-	public ResponseEntity<Event> create(@Valid @RequestBody Optional<Event> event) {
-		if (event.isEmpty())
-			return new ResponseEntity<Event>(HttpStatus.BAD_REQUEST);
+	public ResponseEntity<EventDTO> create(@Valid @RequestBody Optional<EventDTO> eventDTO) {
+		if (eventDTO.isEmpty())
+			return new ResponseEntity<EventDTO>(HttpStatus.BAD_REQUEST);
 
 		log.info("Request to create new Event Arrived");
 
-		this.eventValidator.validate(event.get());
+		this.eventDTOValidator.validate(eventDTO.get());
 
-		Event newEvent = this.eventService.add(event.get());
+		Map<String, Object> metadata = eventDTO.get().getEventMetaData();
 
-		return new ResponseEntity<Event>(newEvent, HttpStatus.CREATED);
+		EventDTO newEvent = this.eventDTOService.add(eventDTO.get());
+
+		metadata = eventMetaDataService.add(newEvent.getEvent(), metadata);
+
+		newEvent.setEventMetaData(metadata);
+
+		return new ResponseEntity<EventDTO>(newEvent, HttpStatus.CREATED);
 	}
 
 	@PutMapping
@@ -63,14 +79,12 @@ public class EventsController {
 
 		log.info("Request to update Event Arrived event id {" + event.get().getId() + "}");
 
-		this.eventValidator.validate(event.get());
-
 		Event newEvent = this.eventService.add(event.get());
 
 		return new ResponseEntity<Event>(newEvent, HttpStatus.OK);
 	}
 
-	@GetMapping("/city/{cityId}")
+	@GetMapping("/cityId}")
 	public List<Event> getAllEventsByCity(@PathVariable long cityId) {
 		List<Event> events = this.eventService.findAllByCityId(cityId);
 		log.info("Event List size is " + events.size() + ", for city Id " + cityId);

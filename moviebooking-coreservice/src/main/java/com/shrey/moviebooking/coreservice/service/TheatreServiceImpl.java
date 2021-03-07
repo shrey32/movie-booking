@@ -1,6 +1,5 @@
 package com.shrey.moviebooking.coreservice.service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shrey.moviebooking.commons.model.Theatre;
+import com.shrey.moviebooking.coreservice.models.Theatre;
+import com.shrey.moviebooking.commons.utils.DateUtils;
 import com.shrey.moviebooking.coreservice.repository.TheatreRepository;
 
 /**
@@ -32,14 +32,14 @@ public class TheatreServiceImpl implements TheatreService {
 	@Override
 	public Theatre add(Theatre theatre) {
 		log.info("Adding a new " + Theatre.class + " {" + theatre + "}");
-		theatre.setCreated(new Date());
+		theatre.setCreated(DateUtils.dbAuditDateTime());
 		Optional<Theatre> optionalTheatre = this.findById(theatre.getId());
 		if (optionalTheatre.isPresent()) {
 			log.info("Updating existing " + Theatre.class + " {" + theatre + "}");
 			Theatre found = optionalTheatre.get();
 			theatre.setId(found.getId());
 			theatre.setCreated(found.getCreated());
-			theatre.setUpdated(new Date());
+			theatre.setUpdated(DateUtils.dbAuditDateTime());
 		}
 		return this.theatreRepository.save(theatre);
 	}

@@ -3,8 +3,8 @@ package com.shrey.moviebooking.coreservice.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.shrey.moviebooking.commons.enums.EventType;
-import com.shrey.moviebooking.commons.model.Event;
+import com.shrey.moviebooking.coreservice.enums.EventType;
+import com.shrey.moviebooking.coreservice.models.Event;
 
 /**
  * 
